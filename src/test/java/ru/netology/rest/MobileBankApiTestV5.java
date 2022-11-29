@@ -1,7 +1,6 @@
 package ru.netology.rest;
 
 import io.restassured.http.ContentType;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -23,6 +22,7 @@ class MobileBankApiTestV5 {
           .statusCode(200)
           .contentType(ContentType.JSON)
           .body("every{ it.balance >= 0 }", is(true))
-      ;
+              // static import для JsonSchemaValidator.matchesJsonSchemaInClasspath
+              .body(matchesJsonSchemaInClasspath("accounts.schema.json"));
     }
 }
